@@ -27,7 +27,6 @@ assets/img/avatar.jpg       侧栏头像（favicon 也是它生成的）
 static/favicon.ico          由头像生成（16/32/48 三档）
 assets/scss/custom.scss     仅中文字体栈，其余全用主题默认
 layouts/_partials/helper/   image.html 覆盖（无图回退）+ cover-art.html 封面生成器
-markdown/                   旧 Hexo 站点恢复备份（不参与构建，勿动）
 themes/hugo-theme-stack/    主题 submodule
 ```
 

@@ -1,11 +1,143 @@
 /* 站点定制层 —— 以 Stack 主题原版样式为基准。
-   这里只保留一件必须做的事：中文优先的系统字体栈
-   （配合 layouts/_partials/head/custom-font.html 移除 Google Fonts，
-   国内访问不额外拉取远程字体）。其余视觉一律使用主题默认值。 */
+   1. 字体栈：中文优先系统字体（配合 layouts/_partials/head/custom-font.html
+      屏蔽 Google Fonts，国内访问不额外拉取远程字体）。
+   2. 暗色模式：整体对齐 VS Code Dark+ 配色（编辑器背景 #1e1e1e、
+      面板/卡片 #252526、代码块背景与语法 token 色）。
+   3. Goldmark 扩展（==mark==、~~删除~~、++插入++、任务列表）的基础样式。
+   其余视觉一律使用主题默认值。 */
 
 :root {
     --sys-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
         "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
         "Noto Sans CJK SC", sans-serif;
     --base-font-family: var(--sys-font-family);
+}
+
+/* ===== VS Code Dark+ 暗色配色（覆盖主题暗色变量；本文件在 style.scss
+   末尾导入，且选择器与主题同为 :root[data-scheme="dark"]，后定义胜出） ===== */
+:root[data-scheme="dark"] {
+    /* 编辑器 / 面板 */
+    --body-background: #1e1e1e;
+    --body-text-color: #cccccc;
+
+    --card-background: #252526;
+    --card-background-selected: #2a2d2e;
+    --card-text-color-main: #d4d4d4;
+    --card-text-color-secondary: #cccccc;
+    --card-text-color-tertiary: #9d9d9d;
+    --card-separator-color: rgba(255, 255, 255, 0.06);
+
+    /* 行内代码与代码块 */
+    --code-background-color: #2d2d2d;
+    --code-text-color: #d4d4d4;
+    --pre-text-color: #d4d4d4;
+    --pre-background-color: #1e1e1e;
+
+    /* 表格 / 引用 */
+    --table-border-color: #3c3c3c;
+    --tr-even-background-color: #2a2d2e;
+    --blockquote-background-color: #2b2b2b;
+
+    /* 编辑器选区色 */
+    ::selection {
+        background-color: #264f78;
+        color: #fff;
+    }
+
+    /* 代码高亮 token：VS Code Dark+（editor.tokenColorCustomizations 同款） */
+    .chroma {
+        color: #d4d4d4;
+        background-color: #1e1e1e;
+    }
+
+    /* 注释 */
+    .chroma .c, .chroma .c1, .chroma .cm, .chroma .cs,
+    .chroma .gp, .chroma .gu {
+        color: #6a9955;
+    }
+
+    /* 关键字 / 控制流 */
+    .chroma .k, .chroma .kc, .chroma .kd, .chroma .kn,
+    .chroma .kp, .chroma .kr {
+        color: #569cd6;
+    }
+
+    /* 类型 / 类名 */
+    .chroma .kt, .chroma .nc, .chroma .nn {
+        color: #4ec9b0;
+    }
+
+    /* 字符串 */
+    .chroma .s, .chroma .sa, .chroma .sb, .chroma .sc, .chroma .dl,
+    .chroma .sd, .chroma .s2, .chroma .se, .chroma .sh, .chroma .si,
+    .chroma .sx, .chroma .sr, .chroma .s1, .chroma .ss {
+        color: #ce9178;
+    }
+
+    /* 数字 */
+    .chroma .m, .chroma .mb, .chroma .mf, .chroma .mh, .chroma .mi,
+    .chroma .mo, .chroma .il {
+        color: #b5cea8;
+    }
+
+    /* 函数 / 内建 */
+    .chroma .nf, .chroma .nb {
+        color: #dcdcaa;
+    }
+
+    /* 属性 / 变量 */
+    .chroma .na, .chroma .nv, .chroma .vc, .chroma .vg, .chroma .vi {
+        color: #9cdcfe;
+    }
+
+    /* 常量 / 装饰器 / 异常 */
+    .chroma .no {
+        color: #4fc1ff;
+    }
+    .chroma .nd, .chroma .ne {
+        color: #c586c0;
+    }
+    .chroma .err {
+        color: #f48771;
+    }
+
+    /* 运算符 / 标点 */
+    .chroma .o, .chroma .ow, .chroma .p {
+        color: #d4d4d4;
+    }
+
+    /* 行号 / 高亮行 */
+    .chroma .lnt {
+        color: #858585;
+    }
+    .chroma .hl {
+        background-color: rgba(38, 79, 120, 0.4);
+    }
+}
+
+/* ===== Goldmark 扩展元素的基础样式（明暗通用） ===== */
+mark {
+    background-color: rgba(255, 213, 0, 0.25);
+    color: inherit;
+    padding: 0 0.2em;
+    border-radius: 2px;
+}
+
+ins {
+    background-color: rgba(63, 185, 80, 0.15);
+    text-decoration: none;
+}
+
+del {
+    opacity: 0.65;
+}
+
+.task-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.task-list input[type="checkbox"] {
+    margin-right: 0.6em;
+    accent-color: #007acc;
 }

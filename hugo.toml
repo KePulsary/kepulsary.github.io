@@ -1,6 +1,6 @@
 baseURL = "https://kepulsary.github.io/"
 defaultContentLanguage = "zh-cn"
-title = "L1aoのblog"
+title = "KePulsaryのblog"
 theme = "PaperMod"
 hasCJKLanguage = true
 enableEmoji = true
@@ -53,7 +53,7 @@ home = ["HTML", "RSS", "JSON"]
 env = "production"
 defaultTheme = "auto"
 description = "CTF · 安全 · 折腾笔记"
-author = "L1ao"
+author = "KePulsary"
 ShowReadingTime = true
 ShowWordCount = true
 ShowShareButtons = false
@@ -66,12 +66,20 @@ comments = false
 DateFormat = "2006-01-02"
 
   [params.label]
-    icon = "/images/avatar.gif"
+    icon = "/images/avatar.jpg"
     iconHeight = 30
 
   [params.homeInfoParams]
-    Title = "Hi, 我是 L1ao 👋"
-    Content = "**CTF player · ROIS**<br>无聊的世界因为我又添了一顿累赘<br>这里记 CTF、安全和瞎折腾的东西"
+    Title = "Hi, 我是 KePulsary 👋"
+    Content = """
+<img class="home-avatar" src="/images/avatar.jpg" alt="KePulsary">
+
+**CTF player · ROIS**
+
+无聊的世界因为我又添了一顿累赘
+
+这里记 CTF、安全和瞎折腾的东西
+"""
 
   [params.assets]
     favicon = "/images/favicon.ico"

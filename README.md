@@ -1,4 +1,4 @@
-# L1aoのblog
+# KePulsaryのblog
 
 Hugo + PaperMod 搭建的博客，部署在 GitHub Pages（Actions 自动构建）。
 

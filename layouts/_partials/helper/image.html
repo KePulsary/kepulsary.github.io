@@ -11,7 +11,10 @@
 
 {{ $result := dict }}
 
-{{ if .Image }}
+{{ if eq .Image false }}
+    {{/* 显式关闭封面：frontmatter image: false（Stack 原生语义） */}}
+    {{ $result = dict "Resource" nil "Permalink" nil "Height" nil "Width" nil }}
+{{ else if .Image }}
     {{ $url := urls.Parse .Image }}
     {{ $permalink := .Image }}
 
@@ -68,18 +71,20 @@
         {{ end }}
     {{ end }}
 {{ else }}
-    {{/* 文章未设置封面时，按标题哈希生成 hex-dump 封面（见 helper/cover-art）。
-           显式设置 image: 前置参数的文章仍优先使用自己的图。 */}}
-    {{ with .Context }}
-        {{ $ctx := . }}
-        {{ with $ctx.Title }}
-            {{ $cover := partial "helper/cover-art" $ctx }}
-            {{ $result = dict
-                "Resource" $cover
-                "Permalink" $cover.RelPermalink
-                "Height" 630
-                "Width" 1200
-            }}
+    {{/* 文章未设置封面时，按标题哈希生成 hex-dump 封面（见 helper/cover-art）；
+           全站开关 [params.article] autoCover（hugo.toml，默认 true），关掉则不生成。 */}}
+    {{ if .Context.Site.Params.article.autoCover }}
+        {{ with .Context }}
+            {{ $ctx := . }}
+            {{ with $ctx.Title }}
+                {{ $cover := partial "helper/cover-art" $ctx }}
+                {{ $result = dict
+                    "Resource" $cover
+                    "Permalink" $cover.RelPermalink
+                    "Height" 630
+                    "Width" 1200
+                }}
+            {{ end }}
         {{ end }}
     {{ end }}
 {{ end }}

@@ -107,9 +107,3 @@ description = "AI & Security · CTF · 折腾笔记"
 
   [params.opengraph.twitter]
     card = "summary_large_image"
-
-  [params.defaultImage]
-    [params.defaultImage.opengraph]
-      enabled = false
-      local = false
-      src = ""

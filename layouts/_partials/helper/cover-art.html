@@ -1,0 +1,68 @@
+{{- /*
+cover-art: 按页面标题哈希（md5）确定性生成 hex-dump 风格封面（SVG）。
+高亮色、选区位置、扫描带位置都由标题哈希决定；首行固定 ELF magic
+（7f 45 4c 46）作为整个博客封面系列的锚点。显示的字节取自
+md5("标题|行|列") 的前两位十六进制——封面本身就是哈希产物。
+同标题永远得到同一张封面；无任何外部字体/图片依赖。
+用法：{{ $res := partial "helper/cover-art" . }} → Hugo resource（SVG）
+*/ -}}
+{{- $page := . -}}
+{{- $title := printf "%s" $page.Title -}}
+{{- $m0 := md5 $title -}}
+
+{{- /* 哈希字符 → 半字节（0..15） */ -}}
+{{- $nibble := slice 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 -}}
+{{- $hex := "0123456789abcdef" -}}
+{{- $n0 := 0 -}}{{- $n1 := 0 -}}{{- $n2 := 0 -}}{{- $n3 := 0 -}}{{- $n4 := 0 -}}{{- $n5 := 0 -}}
+{{- range $i := seq 0 15 -}}
+    {{- $ch := slicestr $hex $i (add $i 1) -}}
+    {{- if eq (slicestr $m0 0 1) $ch -}}{{- $n0 = $i -}}{{- end -}}
+    {{- if eq (slicestr $m0 1 2) $ch -}}{{- $n1 = $i -}}{{- end -}}
+    {{- if eq (slicestr $m0 2 3) $ch -}}{{- $n2 = $i -}}{{- end -}}
+    {{- if eq (slicestr $m0 3 4) $ch -}}{{- $n3 = $i -}}{{- end -}}
+    {{- if eq (slicestr $m0 4 5) $ch -}}{{- $n4 = $i -}}{{- end -}}
+    {{- if eq (slicestr $m0 5 6) $ch -}}{{- $n5 = $i -}}{{- end -}}
+{{- end -}}
+
+{{- $hues := slice "#4cc3ff" "#3ecf8e" "#ffb454" "#ff5d5d" "#a78bfa" -}}
+{{- $hue := index $hues (mod $n0 (len $hues)) -}}
+
+{{- $padX := 48 -}}{{- $padY := 56 -}}
+{{- $colStep := 74 -}}{{- $rowStep := 31 -}}
+{{- $cols := 15 -}}{{- $rows := 17 -}}
+
+{{- /* 两个“选区”（像在十六进制编辑器里选中一段数据）与扫描带的位置 */ -}}
+{{- $r1 := mod $n1 $rows -}}{{- $c1 := mod $n2 10 -}}
+{{- $r2 := mod $n3 $rows -}}{{- $c2 := mod $n4 11 -}}
+{{- $bandY := mod $n5 15 -}}
+
+{{- $elf := slice "7f" "45" "4c" "46" -}}
+{{- $s := newScratch -}}
+{{- $s.Add "svg" `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">` -}}
+{{- $s.Add "svg" `<defs><radialGradient id="vg" cx="0.5" cy="0.45" r="0.8"><stop offset="0.55" stop-color="#0d131f" stop-opacity="0"/><stop offset="1" stop-color="#05080f" stop-opacity="0.6"/></radialGradient></defs>` -}}
+{{- $s.Add "svg" `<rect width="1200" height="630" fill="#0d131f"/>` -}}
+{{- $s.Add "svg" (printf `<rect x="0" y="%d" width="1200" height="40" fill="%s" opacity="0.05"/>` (sub (add $padY (mul $bandY $rowStep)) 12) $hue) -}}
+{{- $s.Add "svg" (printf `<rect x="%d" y="%d" width="%d" height="30" rx="5" fill="%s" opacity="0.12"/>` (sub (add $padX (mul $c1 $colStep)) 7) (sub (add $padY (mul $r1 $rowStep)) 20) (add (mul 4 $colStep) 42) $hue) -}}
+{{- $s.Add "svg" (printf `<rect x="%d" y="%d" width="%d" height="30" rx="5" fill="%s" opacity="0.12"/>` (sub (add $padX (mul $c2 $colStep)) 7) (sub (add $padY (mul $r2 $rowStep)) 20) (add (mul 3 $colStep) 42) $hue) -}}
+{{- $s.Add "svg" `<g font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="21">` -}}
+{{- range $r := seq 0 (sub $rows 1) -}}
+    {{- range $c := seq 0 (sub $cols 1) -}}
+        {{- $h := md5 (printf "%s|%d|%d" $title $r $c) -}}
+        {{- $x := add $padX (mul $c $colStep) -}}
+        {{- $y := add $padY (mul $r $rowStep) -}}
+        {{- if and (eq $r 0) (lt $c 4) -}}
+            {{- /* ELF magic：整组封面的锚点 */ -}}
+            {{- $s.Add "svg" (printf `<text x="%d" y="%d" fill="%s" opacity="0.95" font-weight="600">%s</text>` $x $y $hue (index $elf $c)) -}}
+        {{- else if or (and (eq $r $r1) (ge $c $c1) (lt $c (add $c1 5))) (and (eq $r $r2) (ge $c $c2) (lt $c (add $c2 4))) -}}
+            {{- $s.Add "svg" (printf `<text x="%d" y="%d" fill="%s" opacity="0.9">%s</text>` $x $y $hue (slicestr $h 0 2)) -}}
+        {{- else if eq (slicestr $h 2 3) "0" -}}
+            {{- $s.Add "svg" (printf `<text x="%d" y="%d" fill="%s" opacity="0.5">%s</text>` $x $y $hue (slicestr $h 0 2)) -}}
+        {{- else -}}
+            {{- $s.Add "svg" (printf `<text x="%d" y="%d" fill="#26334d" opacity="0.9">%s</text>` $x $y (slicestr $h 0 2)) -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- $s.Add "svg" `</g><rect width="1200" height="630" fill="url(#vg)"/></svg>` -}}
+
+{{- $cover := resources.FromString (printf "covers/%s.svg" (slicestr $m0 0 12)) ($s.Get "svg") -}}
+{{- return $cover -}}

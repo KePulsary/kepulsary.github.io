@@ -1,10 +1,10 @@
 ---
-title: "CTFshow wp"
+title: "CTFshow 刷题记录"
 date: 2021-08-10 00:00:00
-url: /2021/08/10/ctfshow/
 updated: 2022-12-13 23:22:25
 tags:
-  - ctf
+  - CTF
+  - Web安全
 description: "刷题记录"
 ---
 
@@ -707,7 +707,7 @@ IDAT？
 
 ## 13
 
-![img](image.png)
+![img](img-01.png)
 
 这地方像flag
 
@@ -747,7 +747,7 @@ binwalk 17.png -e
 
 ## 18
 
-![img](image-1.png)
+![img](img-02.png)
 
 拼接一下
 

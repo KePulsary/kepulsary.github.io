@@ -4,7 +4,7 @@ date: 2022-01-18 00:00:00
 updated: 2022-12-13 23:22:25
 tags:
   - Web安全
-description: "nodejs rce"
+description: "原型链污染漏洞原理与 Node.js 利用示例（KittenDIY 150pt）"
 ---
 
 # 原型链污染
@@ -63,7 +63,6 @@ console.log(foo.__proto__ == Foo.prototype)
 - `__proto__`：指向原型对象的构造器。
 - `constructor`：指向当前对象的构造器。
 
-![img](https://blog-1256032382.cos.ap-nanjing.myqcloud.com/img/20210311120136.png)![img](https://blog-1256032382.cos.ap-nanjing.myqcloud.com/img/20210311120456.png)
 
 **原型链污染是什么?**
 

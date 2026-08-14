@@ -1,13 +1,13 @@
 ---
-title: "SEECTF 2023 writeup（Web）"
+title: "SEECTF 2023 题解（Web）"
 date: 2023-06-12 00:00:00
 updated: 2023-10-16 20:36:45
 tags:
   - CTF
-description: "SEECTF web 解题记录"
+description: "SEECTF 2023 Web 题目题解：Express 安全、文件上传绕过与源码审计"
 ---
 
-# SEECTF 2023 writeup（Web）
+# SEECTF 2023 题解（Web）
 
 关键字：ejs，php.ini，ini_set，sqlite3，ssti
 

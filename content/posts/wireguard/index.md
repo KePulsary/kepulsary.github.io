@@ -4,10 +4,10 @@ date: 2023-03-13 21:29:44
 updated: 2023-03-16 14:15:25
 tags:
   - 网络
-description: "使用WireGuard转发内网网段"
+description: "WireGuard 组网实践：wg-easy 部署与跨网段转发配置"
 ---
 
-# 使用WireGuard转发内网网段
+# WireGuard 使用记录
 
 之前打强网杯线下赛，只穿了个socks代理以至于二进制的同学不能接入网络。于是便使用 iptables + wg-easy 来实现一个内网穿透
 

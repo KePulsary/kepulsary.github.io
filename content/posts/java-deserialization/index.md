@@ -5,7 +5,7 @@ updated: 2023-04-23 01:07:25
 tags:
   - Java
   - 反序列化
-description: "java反序列化"
+description: "Java 反序列化入门：反射与 RMI 基础，URLDNS、CommonsCollections 利用链分析"
 ---
 
 # Java 反序列化漫谈

@@ -1,13 +1,13 @@
 ---
-title: "Azure Assassin Alliance CTF 2022 writeup"
+title: "Azure Assassin Alliance CTF 2022 题解"
 date: 2022-06-26 00:00:00
 updated: 2022-12-13 23:22:25
 tags:
   - CTF
-description: "比赛wp"
+description: "Azure Assassin Alliance CTF 2022 Web 题目题解：gogogo、beWhatYouWannaBe、pooru 等 5 道题"
 ---
 
-# Azure Assassin Alliance CTF 2022
+# Azure Assassin Alliance CTF 2022 题解
 
 ## [web]
 

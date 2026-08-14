@@ -5,10 +5,10 @@ updated: 2023-04-27 16:46:15
 tags:
   - Java
   - 反序列化
-description: "FastJson反序列化学习"
+description: "FastJson 反序列化漏洞原理与 TemplatesImpl 利用链分析"
 ---
 
-# FastJson反序列化学习
+# FastJson 反序列化
 
 ## 1. 什么是fastjson?
 

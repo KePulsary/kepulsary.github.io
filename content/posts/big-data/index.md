@@ -3,8 +3,10 @@ title: "大数据学习"
 date: 2023-03-03 17:28:20
 tags:
   - 大数据
-description: "Big Data"
+description: "大数据入门：Hadoop / YARN 分布式环境搭建与核心概念"
 ---
+
+# 大数据学习
 
 ## 大数据
 

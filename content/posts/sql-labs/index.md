@@ -5,10 +5,10 @@ updated: 2022-03-15 18:58:39
 tags:
   - CTF
   - Web安全
-description: "刷题记录"
+description: "SQL-Labs 靶场刷题记录：前七关的注入手法与绕过思路"
 ---
 
-# SQLILABS
+# SQL-Labs 刷题记录
 
 ### 注：本文脚本需要根据自身情况修改
 

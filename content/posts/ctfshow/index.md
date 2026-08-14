@@ -5,10 +5,10 @@ updated: 2022-12-13 23:22:25
 tags:
   - CTF
   - Web安全
-description: "刷题记录"
+description: "CTFshow 平台刷题记录：按关卡整理的 Web 题目解法与思路"
 ---
 
-# PHP特性
+# CTFshow 刷题记录
 
 刷题整理…待补充
 

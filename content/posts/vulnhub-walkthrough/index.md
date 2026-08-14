@@ -4,10 +4,10 @@ date: 2021-11-27 00:00:00
 updated: 2022-12-13 23:22:25
 tags:
   - 渗透测试
-description: "靶机练习"
+description: "VulnHub 靶机实战：SickOs 1.1 与 BSides Vancouver 2018 渗透全过程"
 ---
 
-# 靶机
+# 靶机练习
 
 ## SickOs 1.1
 

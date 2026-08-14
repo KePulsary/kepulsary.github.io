@@ -1,12 +1,12 @@
 ---
-title: "pbctf 2023 writeup"
+title: "pbctf 2023 题解"
 date: 2023-02-21 17:46:17
 tags:
   - CTF
-description: "比赛wp"
+description: "pbctf 2023 题目题解：Makima、The Mindful Zone、git-ls-api"
 ---
 
-# pbctf 2023 writeup
+# pbctf 2023 题解
 
 ## Makima
 

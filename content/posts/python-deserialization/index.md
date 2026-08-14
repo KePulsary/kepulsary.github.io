@@ -5,10 +5,10 @@ updated: 2022-06-30 22:43:04
 tags:
   - Python
   - 反序列化
-description: "笔记"
+description: "Python 反序列化漏洞原理：pickle 机制、PVM 与操作码解析"
 ---
 
-# 长城杯ez_python复盘
+# Python 反序列化
 
 就看了一题 md网刃和极客都没做，亏
 

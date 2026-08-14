@@ -4,7 +4,7 @@ date: 2023-02-26 12:46:22
 updated: 2023-02-27 15:13:43
 tags:
   - k8s
-description: "k8s入门"
+description: "k8s 入门实战：Minikube 创建集群、Deployment 部署与 Service 暴露应用"
 ---
 
 # k8s 初体验

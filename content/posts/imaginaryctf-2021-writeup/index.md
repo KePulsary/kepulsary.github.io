@@ -1,13 +1,13 @@
 ---
-title: "ImaginaryCTF 2021 writeup"
+title: "ImaginaryCTF 2021 题解"
 date: 2021-08-15 00:00:00
 updated: 2021-11-16 15:12:01
 tags:
   - CTF
-description: "wp"
+description: "ImaginaryCTF 2021 Web 题目题解：Roos World、SaaS、Destructoid 等"
 ---
 
-# ImaginaryCTF 2021 writeup
+# ImaginaryCTF 2021 题解
 
 ## Roos World
 

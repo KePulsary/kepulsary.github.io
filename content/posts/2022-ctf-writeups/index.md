@@ -1,11 +1,13 @@
 ---
-title: "2022 CTF writeup 合集"
+title: "2022 CTF 题解合集"
 date: 2022-12-31 00:00:00
 updated: 2022-12-13 23:22:25
 tags:
   - CTF
-description: "比赛wp"
+description: "SUSCTF、dvCTF、UTCTF、zer0pts 等 2022 年多场 CTF 的 Web 题目题解合集"
 ---
+
+# 2022 CTF 题解合集
 
 ## SUSCTF
 

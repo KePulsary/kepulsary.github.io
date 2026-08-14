@@ -4,7 +4,7 @@ date: 2022-03-02 00:00:00
 updated: 2023-04-03 01:07:47
 tags:
   - 开发
-description: "Git学习笔记"
+description: "Git 学习笔记：版本库创建、常用命令与版本回退"
 ---
 
 # Git 学习

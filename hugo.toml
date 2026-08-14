@@ -33,32 +33,44 @@ lastmod = ["lastmod", "updated", ":git", "date"]
     name = "首页"
     url = "/"
     weight = 1
+    [menu.main.params]
+      Icon = "home"
   [[menu.main]]
     identifier = "archives"
     name = "归档"
     url = "/archives/"
     weight = 5
+    [menu.main.params]
+      Icon = "archives"
   [[menu.main]]
     identifier = "tags"
     name = "标签"
     url = "/tags/"
     weight = 10
+    [menu.main.params]
+      Icon = "tag"
   [[menu.main]]
     identifier = "search"
     name = "搜索"
     url = "/search/"
     weight = 15
+    [menu.main.params]
+      Icon = "search"
   [[menu.main]]
     identifier = "about"
     name = "关于"
     url = "/about/"
     weight = 20
+    [menu.main.params]
+      Icon = "user"
 
   [[menu.social]]
     identifier = "github"
     name = "GitHub"
     url = "https://github.com/KePulsary"
     weight = 1
+    [menu.social.params]
+      Icon = "brand-github"
 
 [params]
 mainSections = ["posts"]

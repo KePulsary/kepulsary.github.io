@@ -1,6 +1,6 @@
 baseURL = "https://kepulsary.github.io/"
-defaultContentLanguage = "zh-cn"
-title = "KePulsaryのblog"
+defaultContentLanguage = "zh"
+title = "KePulsary"
 theme = "hugo-theme-stack"
 hasCJKLanguage = true
 enableEmoji = true
@@ -18,11 +18,26 @@ lastmod = ["lastmod", "updated", ":git", "date"]
   [markup.highlight]
     codeFences = true
     guessSyntax = false
-    lineNos = false
+    lineNos = true
+    noClasses = false
     tabWidth = 4
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+    [markup.goldmark.extensions]
+      taskList = true
+      strikethrough = false
+      [markup.goldmark.extensions.extras]
+        [markup.goldmark.extensions.extras.delete]
+          enable = true
+        [markup.goldmark.extensions.extras.insert]
+          enable = true
+        [markup.goldmark.extensions.extras.mark]
+          enable = true
+        [markup.goldmark.extensions.extras.subscript]
+          enable = true
+        [markup.goldmark.extensions.extras.superscript]
+          enable = true
   [markup.tableOfContents]
     startLevel = 2
     endLevel = 4
@@ -75,11 +90,10 @@ lastmod = ["lastmod", "updated", ":git", "date"]
 [params]
 mainSections = ["posts"]
 favicon = "/favicon.ico"
-description = "AI & Security · CTF · 折腾笔记"
+description = "AI & Security"
 
   [params.footer]
     since = 2021
-    customText = ""
 
   [params.dateFormat]
     published = "2006-01-02"
@@ -92,6 +106,7 @@ description = "AI & Security · CTF · 折腾笔记"
   [params.article]
     math = false
     readingTime = true
+    autoCover = false
     [params.article.license]
       enabled = false
 
@@ -101,9 +116,6 @@ description = "AI & Security · CTF · 折腾笔记"
     [[params.widgets.homepage]]
       type = "archives"
       limit = 5
-    [[params.widgets.homepage]]
-      type = "categories"
-      limit = 10
     [[params.widgets.homepage]]
       type = "tag-cloud"
       limit = 10

@@ -1,0 +1,90 @@
+baseURL = "https://kepulsary.github.io/"
+defaultContentLanguage = "zh-cn"
+title = "L1aoのblog"
+theme = "PaperMod"
+hasCJKLanguage = true
+enableEmoji = true
+
+[pagination]
+pagerSize = 10
+
+[permalinks]
+posts = "/:year/:month/:day/:filename/"
+
+[frontmatter]
+lastmod = ["lastmod", "updated", ":git", "date"]
+
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = false
+    lineNos = true
+    tabWidth = 4
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[outputs]
+home = ["HTML", "RSS", "JSON"]
+
+[menu]
+  [[menu.main]]
+    identifier = "archives"
+    name = "归档"
+    url = "/archives/"
+    weight = 5
+  [[menu.main]]
+    identifier = "tags"
+    name = "标签"
+    url = "/tags/"
+    weight = 10
+  [[menu.main]]
+    identifier = "search"
+    name = "搜索"
+    url = "/search/"
+    weight = 20
+  [[menu.main]]
+    identifier = "about"
+    name = "关于"
+    url = "/about/"
+    weight = 30
+
+[params]
+env = "production"
+defaultTheme = "auto"
+description = "CTF · 安全 · 折腾笔记"
+author = "L1ao"
+ShowReadingTime = true
+ShowWordCount = true
+ShowShareButtons = false
+ShowPostNavLinks = true
+ShowBreadCrumbs = true
+ShowCodeCopyButtons = true
+ShowToc = true
+TocOpen = false
+comments = false
+DateFormat = "2006-01-02"
+
+  [params.label]
+    icon = "/images/avatar.gif"
+    iconHeight = 30
+
+  [params.homeInfoParams]
+    Title = "Hi, 我是 L1ao 👋"
+    Content = "**CTF player · ROIS**<br>无聊的世界因为我又添了一顿累赘<br>这里记 CTF、安全和瞎折腾的东西"
+
+  [params.assets]
+    favicon = "/images/favicon.ico"
+
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/KePulsary"
+
+  [params.fuseOpts]
+    isCaseSensitive = false
+    shouldSort = true
+    location = 0
+    distance = 1000
+    threshold = 0.4
+    minMatchCharLength = 0
+    keys = ["title", "permalink", "summary", "content"]

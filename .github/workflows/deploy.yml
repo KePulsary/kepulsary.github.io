@@ -27,7 +27,8 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: "latest"
+          # 与本地开发版本保持一致；升级本地后同步改这里（Hugo 大版本升级偶有模板/配置破坏性变更）
+          hugo-version: "0.165.0"
           extended: true
 
       - name: Setup Pages

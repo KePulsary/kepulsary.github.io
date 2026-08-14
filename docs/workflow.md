@@ -116,4 +116,5 @@ curl -s -o /dev/null -w "%{http_code}" https://kepulsary.github.io/
 | 构建报 `can't evaluate field Fnv32a` | Hugo v0.165 已移除 `hash.Fnv32a`、`strings.Trunc`；`hash.XxHash` 返回 hex 字符串不能做算术。模板哈希运算用 `md5` + `index` 取字节值（参考 `layouts/_partials/helper/cover-art.html`） |
 | 旧链接 404 | 2026-08 起旧文 `url:` 已移除、旧 URL 废弃，404 属预期；**不要用 `url:` 字段修复** |
 | `/search/` 变成普通文章页 | 搜索页必须在 `content/page/search/index.md`（page 分区，frontmatter 带 `outputs: [html, json]`）；移到根目录 `layout: "search"` 即失效，且索引 `search.json` 不再生成 |
+| `/search/` 变成 `/搜索/`（404） | page 分区 permalink 的 `:slug:` 在 frontmatter 无 slug 时回退到 title，中文 title 会被 URLize；**page 分区页面必须写英文 `slug:`**（如 `slug: "search"`），URL 仍由 permalinks 生成，不写 `url:` |
 | 图片改了但页面没变 | `resources/` 缓存；删掉该目录重构建 |

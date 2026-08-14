@@ -5,20 +5,70 @@
 ## 发新文章（零配置）
 
 ```bash
-hugo new posts/文章标题/index.md   # 生成 content/posts/文章标题/index.md（archetype 模板）
+hugo new posts/<slug>/index.md   # slug 用英文小写 kebab-case，命名规范见下
 ```
 
-1. 编辑正文；**配图直接丢进同一目录**，正文 `![](截图1.png)` 引用（相对路径，Hugo page bundle）
-2. frontmatter 只需要 `title` / `date` / `tags`；**不要写 `url:`**（那是旧文专用的链接锚定字段）
+1. 编辑正文；**配图直接丢进同一目录**，截图按出现顺序命名 `img-01.png`、`img-02.png`，示意图用语义化短名（`topology.png`、`segment-tree-basic.svg`），正文 `![](img-01.png)` 相对引用（Hugo page bundle）
+2. frontmatter 只需要 `title` / `date` / `tags`；**不要写 `url:`**（URL 由 permalinks 按 `/:year/:month/:day/:slug/` 自动生成）
 3. 封面自动生成：不写 `image:` 时按标题 md5 确定性生成 hex-dump 风格 SVG（同标题永远同封面）；想用自己的封面→图放同目录 + `image: cover.jpg`
 4. `draft: false` 才会发布（archetype 默认已是 false）
 
-不装 Hugo 也能发：在 GitHub 网页上建 `content/posts/标题/index.md`、图片网页上传同目录，效果相同。
+不装 Hugo 也能发：在 GitHub 网页上建 `content/posts/<slug>/index.md`、图片网页上传同目录，效果相同。
+
+## 命名与标签规范（内容层）
+
+> 2026-08 全站统一整理后生效。新文按此默认命名即可，不增加发文步骤。URL 由 permalinks 自动生成（`/:year/:month/:day/:slug/`），**全站不写 `url:` 字段**。
+
+### 文章目录名（page bundle slug）
+
+- 英文小写 kebab-case：仅 `[a-z0-9-]`，无空格、无中文、无下划线
+- writeup 类：`<赛事>-<年份>-writeup`（`pbctf-2023-writeup`、`seectf-2023-writeup`）
+- 学习/实践类：主题 slug（`prototype-pollution`、`git-notes`、`k8s-basics`、`fastjson-deserialization`）
+- 平台/专有名词可保留原名小写（`ctfshow`、`sql-labs`、`wireguard`）
+
+### 文章标题（frontmatter `title`）
+
+| 类别 | 格式 | 示例 |
+|---|---|---|
+| 赛事 writeup | `<赛事名> <年份> writeup` | pbctf 2023 writeup、ImaginaryCTF 2021 writeup |
+| writeup 合集 / 范围收窄 | 加 `合集` 或 `（范围）` | 2022 CTF writeup 合集、SEECTF 2023 writeup（Web） |
+| 平台刷题 | `<平台名> 刷题记录` | CTFshow 刷题记录、SQL-Labs 刷题记录 |
+| 学习笔记 | `<主题>` | FastJson 反序列化、Git 学习、k8s 初体验、原型链污染 |
+| 实践记录 | `<主题>记录` | 软路由折腾记录、WireGuard 使用记录 |
+
+- 中英文混排加空格（`FastJson 反序列化`、`k8s 初体验`、`Python 反序列化`）
+- 正文一级标题（`# ...`）与 `title` 保持一致
+- 专有名词按官方拼写：FastJson、WireGuard、Git、k8s、SQL-Labs、CTFshow
+
+### 图片命名
+
+- 全小写 kebab-case：仅 `[a-z0-9-]`，无空格、无 `_`、无 `~@` 等特殊字符
+- 正文截图：按出现顺序 `img-01.png`、`img-02.png` 递增，同文章内唯一
+- 示意图 / 实物照片 / 官方配图：语义化短名（`topology.png`、`flowchart.png`、`accessories.jpg`、`segment-tree-basic.svg`、`module-01-cluster.svg`）
+- 改名时必须同步更新正文引用；删除未被引用的孤儿图片
+
+### tags 规范
+
+全站固定 11 个标签，一文 1~2 个、只打准确标签；不新增标签，除非新主题形成系列（需同步更新本表与 AGENTS.md）：
+
+| 标签 | 适用 |
+|---|---|
+| `CTF` | 比赛 writeup、CTF 平台刷题 |
+| `Web安全` | Web 漏洞原理与练习（原型链、SQL 注入、ctfshow 刷题） |
+| `渗透测试` | 靶机、内网/域渗透实战 |
+| `反序列化` | 反序列化利用链专题（FastJson、Java、Python） |
+| `Java` / `Python` | 对应语言生态文章 |
+| `算法` / `大数据` / `k8s` | 对应主题 |
+| `开发` | 开发实践（Go 项目、Git 等工具） |
+| `网络` | 组网、VPN、软路由 |
+
+废弃标签：`笔记`、`日记`、`刷题`、`基础知识`、`硬件`、`ctf`（小写）等含糊/重复标签不再使用。
 
 ## 改旧文章
 
-- 21 篇 2021–2023 旧文的 frontmatter 带有 `url:` 字段（固定 Hexo 时代旧链接），**编辑时必须保留**
+- 21 篇 2021–2023 旧文的 frontmatter `url:` 字段已于 2026-08 移除（旧 Hexo 链接废弃），URL 统一由 permalinks 生成；**不要重新添加 `url:`**
 - 旧文配图已全部本地化在各文章目录；仅 3 张例外保留远程链接（见"已知坑"）
+- 2026-08 已统一整理旧文：目录改英文 slug、图片改 `img-NN`/语义化名、标题与 tags 已规范；**编辑时保持现命名**，不要把文件名改回旧样式
 
 ## 本地预览与构建
 
@@ -54,5 +104,5 @@ curl -s -o /dev/null -w "%{http_code}" https://kepulsary.github.io/
 | 构建报 `len of type bool` | `[params.widgets]` 下不能放布尔值，widget 全用 `[[params.widgets.homepage]]` 数组项 |
 | 构建报 `can't evaluate field Fnv32a` | Hugo v0.165 已移除 `hash.Fnv32a`、`strings.Trunc`；`hash.XxHash` 返回 hex 字符串不能做算术。模板哈希运算用 `md5` + `index` 取字节值（参考 `layouts/_partials/helper/cover-art.html`） |
 | WARN `Unable to get remote resource ...myqcloud.com` | 《原型链污染》2 张 COS 图 + 《go_web》1 张 Google 缩略图源站已失联，引用保留在 md 里，属已知无害噪音 |
-| 旧链接 404 | 旧文 `url:` 字段被删或被改；从 git 历史找回原值恢复 |
+| 旧链接 404 | 2026-08 起旧文 `url:` 已移除、旧 URL 废弃，404 属预期；**不要用 `url:` 字段修复** |
 | 图片改了但页面没变 | `resources/` 缓存；删掉该目录重构建 |

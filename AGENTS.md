@@ -36,11 +36,19 @@ Hugo + Stack 主题的个人博客（KePulsary，AI & SEC / CTF），GitHub Page
 
 | 规则 | 内容 |
 |------|------|
-| 旧文 `url:` 字段不可动 | 21 篇 Hexo 时代旧文靠 frontmatter `url:` 固定旧链接；动了即断链 |
-| 新文不写 `url:` | 新文章按 `/:year/:month/:day/:目录名/` 生成（Hugo 0.146+ 会小写化 `:filename`，旧文因此才需要 `url:` 锚定） |
+| 全站不写 `url:` | 21 篇旧文的 `url:` 锚定已于 2026-08 移除（旧链接废弃）；URL 统一由 permalinks 按 `/:year/:month/:day/:slug/` 生成，任何文章都不得再写 `url:` 字段 |
 | 不改 `themes/` 内容 | 主题是 git submodule；定制只走项目层覆盖（见 docs/coding-rules.md） |
 | 视觉保持 Stack 原版默认 | 用户明确拒绝过换肤方案；个性化只允许落在内容产物层（自动封面、头像、文案），不加装饰性动效 |
 | 不引入外网字体/脚本 | 无 Google Fonts 等国内不可达资源；图片一律本地（page bundle），不回图床 |
+
+### 内容命名与标签规范（2026-08 全站统一，细节见 docs/workflow.md「命名与标签规范」）
+
+| 项 | 规范 |
+|---|---|
+| 文章目录 | 英文小写 kebab-case slug；writeup 类 `<赛事>-<年份>-writeup`。URL 由 permalinks 自动生成（`/:year/:month/:day/:slug/`），全站不写 `url:` |
+| 文章标题 | writeup 统一 `<赛事> <年份> writeup`、平台刷题 `<平台名> 刷题记录`；中英文混排加空格；正文 H1 与 title 一致 |
+| 图片命名 | 全小写 kebab-case，仅 `[a-z0-9-]`；截图按出现顺序 `img-01.png` 递增，示意图/照片用语义化短名；改名同步更新正文引用，不留孤儿图 |
+| tags | 全站固定 11 个标签（CTF / Web安全 / 渗透测试 / 反序列化 / Java / Python / 算法 / 大数据 / k8s / 开发 / 网络），一文 1~2 个、只打准确标签，禁含糊标签（笔记/日记/刷题/基础知识等） |
 
 ### 边界与禁止
 

@@ -9,7 +9,8 @@ enableEmoji = true
 pagerSize = 10
 
 [permalinks]
-posts = "/:year/:month/:day/:filename/"
+  page = "/:slug/"
+  posts = "/:year/:month/:day/:filename/"
 
 [frontmatter]
 lastmod = ["lastmod", "updated", ":git", "date"]

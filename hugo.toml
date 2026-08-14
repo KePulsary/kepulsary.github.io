@@ -1,7 +1,7 @@
 baseURL = "https://kepulsary.github.io/"
 defaultContentLanguage = "zh-cn"
 title = "KePulsaryのblog"
-theme = "PaperMod"
+theme = "hugo-theme-stack"
 hasCJKLanguage = true
 enableEmoji = true
 
@@ -18,16 +18,21 @@ lastmod = ["lastmod", "updated", ":git", "date"]
   [markup.highlight]
     codeFences = true
     guessSyntax = false
-    lineNos = true
+    lineNos = false
     tabWidth = 4
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
-
-[outputs]
-home = ["HTML", "RSS", "JSON"]
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
 
 [menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "首页"
+    url = "/"
+    weight = 1
   [[menu.main]]
     identifier = "archives"
     name = "归档"
@@ -42,57 +47,70 @@ home = ["HTML", "RSS", "JSON"]
     identifier = "search"
     name = "搜索"
     url = "/search/"
-    weight = 20
+    weight = 15
   [[menu.main]]
     identifier = "about"
     name = "关于"
     url = "/about/"
-    weight = 30
+    weight = 20
+
+  [[menu.social]]
+    identifier = "github"
+    name = "GitHub"
+    url = "https://github.com/KePulsary"
+    weight = 1
 
 [params]
-env = "production"
-defaultTheme = "auto"
-description = "CTF · 安全 · 折腾笔记"
-author = "KePulsary"
-ShowReadingTime = true
-ShowWordCount = true
-ShowShareButtons = false
-ShowPostNavLinks = true
-ShowBreadCrumbs = true
-ShowCodeCopyButtons = true
-ShowToc = true
-TocOpen = false
-comments = false
-DateFormat = "2006-01-02"
+mainSections = ["posts"]
+favicon = "/favicon.ico"
+description = "AI & Security · CTF · 折腾笔记"
 
-  [params.label]
-    icon = "/images/avatar.jpg"
-    iconHeight = 30
+  [params.footer]
+    since = 2021
+    customText = ""
 
-  [params.homeInfoParams]
-    Title = "Hi, 我是 KePulsary 👋"
-    Content = """
-<img class="home-avatar" src="/images/avatar.jpg" alt="KePulsary">
+  [params.dateFormat]
+    published = ":date_full"
+    lastUpdated = ":date_full"
 
-**CTF player · ROIS**
+  [params.sidebar]
+    emoji = "🛡️"
+    subtitle = "AI & SEC"
+    avatar = "img/avatar.jpg"
 
-无聊的世界因为我又添了一顿累赘
+  [params.article]
+    math = false
+    readingTime = true
+    [params.article.license]
+      enabled = false
 
-这里记 CTF、安全和瞎折腾的东西
-"""
+  [params.widgets]
+    [[params.widgets.homepage]]
+      type = "search"
+    [[params.widgets.homepage]]
+      type = "archives"
+      limit = 5
+    [[params.widgets.homepage]]
+      type = "categories"
+      limit = 10
+    [[params.widgets.homepage]]
+      type = "tag-cloud"
+      limit = 10
+    [[params.widgets.page]]
+      type = "toc"
 
-  [params.assets]
-    favicon = "/images/favicon.ico"
+  [params.colorScheme]
+    toggle = true
+    default = "auto"
 
-  [[params.socialIcons]]
-    name = "github"
-    url = "https://github.com/KePulsary"
+  [params.comments]
+    enabled = false
 
-  [params.fuseOpts]
-    isCaseSensitive = false
-    shouldSort = true
-    location = 0
-    distance = 1000
-    threshold = 0.4
-    minMatchCharLength = 0
-    keys = ["title", "permalink", "summary", "content"]
+  [params.opengraph.twitter]
+    card = "summary_large_image"
+
+  [params.defaultImage]
+    [params.defaultImage.opengraph]
+      enabled = false
+      local = false
+      src = ""

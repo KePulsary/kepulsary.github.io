@@ -70,11 +70,10 @@ description = "AI & Security · CTF · 折腾笔记"
     customText = ""
 
   [params.dateFormat]
-    published = ":date_full"
-    lastUpdated = ":date_full"
+    published = "2006-01-02"
+    lastUpdated = "2006-01-02"
 
   [params.sidebar]
-    emoji = "🛡️"
     subtitle = "AI & SEC"
     avatar = "img/avatar.jpg"
 

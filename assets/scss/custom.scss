@@ -1,0 +1,365 @@
+/* =========================================================
+   Operator Console — 站点视觉定制（frontend-design 方法论）
+   方向：深蓝灰控制台 + 琥珀信号色；等宽字体只承载元数据；
+   签名元素是首页终端 hero；其余保持克制。
+   只覆盖 token 与少量组件，主题结构不动。
+   ========================================================= */
+
+/* ---------- 1. Token：颜色 ---------- */
+:root {
+    /* 深浅两套语义色（浅色 = 冷纸面，非米色） */
+    --body-background: #f5f7fa;
+    --card-background: #ffffff;
+    --card-background-selected: #eef2f7;
+    --accent-color: #a4690b;          /* 琥珀（浅色下加深保证对比度） */
+    --accent-color-darker: #855508;
+    --accent-color-text: #fff;
+
+    --console-ink: #1c2431;           /* 正文墨色 */
+    --console-muted: #5d6878;         /* 次级信息 */
+    --console-hairline: rgba(18, 28, 45, 0.10);
+    --console-term-bg: #0a0f19;       /* 终端窗口恒为深色 */
+    --console-term-ink: #dae2ee;
+    --console-term-prompt: #e9c07e;   /* 输入行琥珀 */
+    --console-accent-fill: #f5b84b;   /* 装饰填充用琥珀 */
+    --code-bg: #f0f2f6;
+}
+
+[data-scheme="dark"] {
+    --body-background: #0c111b;       /* 深蓝灰，非纯黑 */
+    --card-background: #121a29;
+    --card-background-selected: #1a2436;
+    --accent-color: #f5b84b;
+    --accent-color-darker: #d99e2f;
+    --accent-color-text: #141a26;
+
+    --console-ink: #dae2ee;
+    --console-muted: #8d99ad;
+    --console-hairline: rgba(233, 240, 255, 0.08);
+    --code-bg: #0a0f19;
+}
+
+/* ---------- 2. Token：字体 ---------- */
+:root {
+    --console-mono: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono",
+        Menlo, Consolas, "Liberation Mono", monospace;
+    --card-border-radius: 14px;
+    --shadow-l1: 0 1px 2px rgba(12, 17, 27, 0.06);
+}
+
+/* ---------- 3. 全局质感 ---------- */
+html {
+    font-size: 17px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+        "Noto Sans CJK SC", sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+    background: rgba(245, 184, 75, 0.30);
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ---------- 4. 签名元素：首页终端 hero ---------- */
+.console-hero {
+    margin-bottom: var(--card-padding, 24px);
+}
+
+.console-window {
+    background: var(--console-term-bg);
+    border: 1px solid var(--console-hairline);
+    border-radius: var(--card-border-radius);
+    box-shadow: 0 10px 30px rgba(8, 12, 22, 0.22);
+    overflow: hidden;
+}
+
+.console-titlebar {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.035);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.console-titlebar .dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    opacity: 0.85;
+}
+.dot-r { background: #e5615c; }
+.dot-y { background: #e0a63f; }
+.dot-g { background: #59bf75; }
+
+.console-title {
+    flex: 1;
+    text-align: center;
+    font-family: var(--console-mono);
+    font-size: 0.72rem;
+    color: #6d7a90;
+    letter-spacing: 0.04em;
+    margin-right: 45px; /* 平衡左侧三个圆点 */
+}
+
+.console-body {
+    margin: 0;
+    padding: 18px 20px 20px;
+    min-height: 9.5em;
+    font-family: var(--console-mono);
+    font-size: 0.92rem;
+    line-height: 1.75;
+    color: var(--console-term-ink);
+    white-space: pre-wrap;
+}
+
+.console-body .ln {
+    display: block;
+    min-height: 1.75em;
+}
+
+.console-body .in {
+    color: var(--console-term-prompt);
+    font-weight: 500;
+}
+
+.console-body .out {
+    color: var(--console-term-ink);
+}
+
+.console-body .ps1 {
+    color: var(--console-term-prompt);
+}
+
+.cursor {
+    display: inline-block;
+    width: 0.55em;
+    height: 1.05em;
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    background: var(--console-accent-fill);
+    animation: console-blink 1.06s steps(1) infinite;
+}
+
+@keyframes console-blink {
+    50% { opacity: 0; }
+}
+
+/* ---------- 5. 文章卡片：安静的档案条目 ---------- */
+.article-list article {
+    position: relative;
+    border: 1px solid var(--console-hairline);
+    border-radius: var(--card-border-radius);
+    background: var(--card-background);
+    box-shadow: var(--shadow-l1);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    overflow: hidden;
+}
+
+.article-list article::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--console-accent-fill);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.18s ease;
+}
+
+.article-list article:hover {
+    transform: translateY(-2px);
+    border-color: rgba(245, 184, 75, 0.55);
+    box-shadow: 0 12px 28px rgba(8, 12, 22, 0.14);
+}
+
+.article-list article:hover::before {
+    transform: scaleY(1);
+}
+
+.article-title {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.article-subtitle {
+    color: var(--console-muted);
+    font-weight: 400;
+}
+
+/* 卡片元数据 → 等宽“眉毛”行（真实元数据，非装饰） */
+.article-list .article-meta,
+.inline-meta {
+    font-family: var(--console-mono);
+    font-size: 0.74rem;
+    color: var(--console-muted);
+    letter-spacing: 0.02em;
+}
+
+.article-list .article-meta time,
+.article-list .article-meta a {
+    color: var(--console-muted);
+}
+
+.article-list .article-meta a:hover {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+/* ---------- 6. 侧栏：操作员面板 ---------- */
+.site-avatar .site-avatar-image,
+.site-avatar img {
+    border-radius: 50%;
+    box-shadow:
+        0 0 0 3px var(--body-background),
+        0 0 0 5px var(--console-accent-fill);
+}
+
+.site-header .site-title {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.site-header .site-subtitle {
+    font-family: var(--console-mono);
+    font-size: 0.82rem;
+    color: var(--accent-color);
+    letter-spacing: 0.08em;
+}
+
+.main .menu {
+    font-family: var(--console-mono);
+    font-size: 0.86rem;
+}
+
+.sidebar .widget-tag-cloud a {
+    font-family: var(--console-mono);
+    font-size: 0.8rem;
+}
+
+/* 右侧挂件标题 */
+.widget-title {
+    font-family: var(--console-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--console-muted);
+}
+
+/* ---------- 7. 文章页 ---------- */
+.article-page .article-title {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.article-page .article-header .article-meta {
+    font-family: var(--console-mono);
+    font-size: 0.8rem;
+    color: var(--console-muted);
+}
+
+/* 内容标题：左侧琥珀刻度，编码层级 */
+.article-content h2,
+.article-content h3 {
+    position: relative;
+    scroll-margin-top: 84px;
+}
+
+.article-content h2 {
+    padding-left: 14px;
+}
+
+.article-content h2::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.22em;
+    bottom: 0.22em;
+    width: 4px;
+    border-radius: 2px;
+    background: var(--console-accent-fill);
+}
+
+/* 行内代码：琥珀淡底 */
+.article-content :not(pre) > code {
+    font-family: var(--console-mono);
+    font-size: 0.86em;
+    background: color-mix(in srgb, var(--console-accent-fill) 14%, transparent);
+    color: var(--accent-color);
+    padding: 0.15em 0.4em;
+    border-radius: 5px;
+}
+
+/* 代码块：统一深色终端观感 */
+.article-content .highlight pre {
+    border-radius: 10px;
+}
+
+/* 引用块 */
+.article-content blockquote {
+    border-left: 3px solid var(--console-accent-fill);
+    border-radius: 0 8px 8px 0;
+    background: var(--code-bg);
+}
+
+/* ---------- 8. 其他组件 ---------- */
+.pagination {
+    font-family: var(--console-mono);
+    font-size: 0.85rem;
+}
+
+.tag-cloud a,
+.terms-tags a {
+    font-family: var(--console-mono);
+}
+
+.search-form input,
+#searchInput {
+    font-family: var(--console-mono);
+}
+
+.article-content a,
+.widget-form a,
+.pagination a {
+    text-underline-offset: 3px;
+}
+
+/* 深色模式下强调色按钮/链接对比度兜底 */
+[data-scheme="dark"] .button,
+[data-scheme="dark"] a.button {
+    color: var(--accent-color-text);
+}
+
+/* ---------- 9. 移动端 ---------- */
+@media (max-width: 600px) {
+    html { font-size: 16px; }
+
+    .console-body {
+        font-size: 0.85rem;
+        padding: 14px 16px 16px;
+    }
+
+    .console-title {
+        margin-right: 0;
+    }
+}

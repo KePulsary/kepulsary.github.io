@@ -1,0 +1,58 @@
+{{ define "main" }}
+    {{- $paginator := partial "helper/paginator.html" . -}}
+
+    {{- $posts := where .Site.RegularPages "Type" "posts" -}}
+    <section class="console-hero" aria-label="关于这个博客">
+        <div class="console-window">
+            <div class="console-titlebar" aria-hidden="true">
+                <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+                <span class="console-title">kepulsary@github-pages:~</span>
+            </div>
+            <pre class="console-body" id="console-body"><span class="ln in">$ whoami</span>
+<span class="ln out">KePulsary — AI &amp; SEC</span>
+<span class="ln in">$ cat ~/motd</span>
+<span class="ln out">无聊的世界因为我又添了一顿累赘</span>
+<span class="ln in"><span class="ps1">$ </span><span class="cursor" aria-hidden="true"></span></span></pre>
+        </div>
+    </section>
+
+    <section class="article-list">
+        {{ range $index, $element := $paginator.Pages }}
+            {{ partial "article-list/default" . }}
+        {{ end }}
+    </section>
+
+    {{- partial "pagination.html" . -}}
+    {{- partial "footer/footer" . -}}
+
+    <script>
+    (function () {
+        var body = document.getElementById('console-body');
+        if (!body) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var lines = Array.prototype.slice.call(body.querySelectorAll('.ln'));
+        var tasks = [];
+        lines.forEach(function (ln) {
+            if (ln.querySelector('.cursor') !== null) return; /* keep final prompt line as-is */
+            var full = ln.textContent;
+            ln.textContent = '';
+            tasks.push({ el: ln, text: full });
+        });
+        var t = 0;
+        (function next() {
+            if (t >= tasks.length) return;
+            var job = tasks[t], i = 0;
+            (function tick() {
+                i = Math.min(job.text.length, i + 1 + (Math.random() < 0.25 ? 1 : 0));
+                job.el.textContent = job.text.slice(0, i);
+                if (i < job.text.length) setTimeout(tick, 14 + Math.random() * 36);
+                else { t++; setTimeout(next, 180); }
+            })();
+        })();
+    })();
+    </script>
+{{ end }}
+
+{{ define "right-sidebar" }}
+    {{ partial "sidebar/right.html" (dict "Context" . "Scope" "homepage") }}
+{{ end }}
